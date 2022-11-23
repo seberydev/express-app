@@ -2,12 +2,9 @@
   "name": "json-db",
   "version": "0.0.0",
   "private": true,
-  "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "nodemon ./bin/www",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.6",
