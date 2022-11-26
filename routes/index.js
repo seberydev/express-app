@@ -113,17 +113,6 @@ router.get("/delete-teacher/:_id", (req, res) => {
   res.redirect("/teachers");
 });
 
-/* GET teachers schedules */
-router.get("/teachers-schedules", (req, res) => {
-  res.render("teachers-schedules", { title: "Horarios Maestros" });
-});
-
-/* POST teachers schedules */
-router.post("/schedules", (req, res) => {
-  
-});
-
-
 // Teachers ---------------------------------------------------------------------------------------------------------
 
 module.exports = router;

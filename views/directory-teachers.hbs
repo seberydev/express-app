@@ -5,18 +5,19 @@
         <h1>Maestros</h1>
       </div>
       <div class="card-body">
-        <table class="table table-sm" id="table">
-          <thead>
-            <tr class="text-center">
-              <th scope="col">Nombre</th>
-              <th scope="col">Correo</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Matricula</th>
-              <th scope="col">Opciones</th>
-            </tr>
-          </thead>
-            {{#each tdir}}
-              <tbody class="text-center">
+        {{#if tdir}}
+          <table class="table table-sm" id="table">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              {{#each tdir}}
                 <tr>
                   <td>{{this.name}} {{this.last_name}}</td>
                   <td>{{this.email}}</td>
@@ -29,9 +30,12 @@
                       Borrar
                     </a></td>
                 </tr>
-              </tbody>
-            {{/each}}
-        </table>
+              {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          <h4>No hay información</h4>
+        {{/if}}
       </div>
       <div class="card-footer">
         <a href="/new-info-teacher" class="btn btn-primary">

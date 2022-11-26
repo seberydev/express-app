@@ -1,15 +1,35 @@
-<div class="container p-4">
-  <div class="card">
-    <div class="card-header">
-      <h1>Horarios-Alumnos</h1>
-    </div>
-    <div class="card-body">
-      Here gose the schedules
-    </div>
-    <div class="card-footer">
-      <a href="/" class="btn btn-primary">
-        Inicio
-      </a>
+<center>
+
+  <div class="container p-4">
+    <div class="card">
+      <div class="card-header">
+        <h1>Horarios-Alumnos</h1>
+      </div>
+      <div class="card-body">
+        {{#if schdir}}
+          <table class="table table-sm">
+            <thead>
+              <tr class="text-center">
+
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              {{#each schdir}}
+                <tr>
+
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          <h4>No hay horarios</h4>
+        {{/if}}
+      </div>
+      <div class="card-footer">
+        <a href="/" class="btn btn-primary">
+          Inicio
+        </a>
+      </div>
     </div>
   </div>
-</div>
+</center>
