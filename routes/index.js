@@ -2,7 +2,9 @@ var express = require("express");
 var router = express.Router();
 const validateDataStudent = require("../controllers/validateDataStudent");
 const validateDataTeacher = require("../controllers/validateDataTeacher");
+const validateDataSchedule = require("../controllers/validateDataSchedule");
 const fs = require("fs");
+const { text } = require("express");
 const uuid = require("uuid").v4;
 
 /* GET home page. */
@@ -59,11 +61,6 @@ router.get("/delete-student/:_id", (req, res) => {
   res.redirect("/students");
 });
 
-/* GET students schedules */
-router.get("/students-schedules", (req, res) => {
-  res.render("students-schedules", { title: "Horarios Estudiantes" });
-});
-
 // Students ---------------------------------------------------------------------------------------------------------
 
 // Teachers ---------------------------------------------------------------------------------------------------------
@@ -114,5 +111,48 @@ router.get("/delete-teacher/:_id", (req, res) => {
 });
 
 // Teachers ---------------------------------------------------------------------------------------------------------
+
+// Schedules --------------------------------------------------------------------------------------------------------
+const people = fs.readFileSync("json/db_schedules.json");
+let person = JSON.parse(people);
+
+/* GET students schedule */
+router.get('/students-schedules', (req, res) => {
+  res.render('students-schedules', { title: "Horarios Alumnos", person });
+});
+
+/* GET teachers schedule */
+router.get('/teachers-schedules', (req, res) => {
+  res.render('teachers-schedules', { title: "Horarios Maestros", person });
+});
+
+/* GET new schedule */
+router.get('/new-schedule', (req, res) => {
+  res.render('new-schedule', { title: "Cree Nuevos Horarios"});
+});
+
+/* POST teachers schedule */
+router.post("/teachers-schedules", function (req, res, next) {
+  const validatedData = validateDataSchedule(req.body);
+
+  if (validatedData.error) {
+    res.status(400).send("Verify Data");
+  }
+
+  const infoData = {
+    _id: uuid(),
+    
+  };
+
+  teacher.push(infoData);
+
+  const json_dir = JSON.stringify(teacher);
+  fs.writeFileSync("json/db_schedules.json", json_dir, "utf8");
+
+  res.redirect("/teachers-schedules");
+});
+
+// Schedules --------------------------------------------------------------------------------------------------------
+
 
 module.exports = router;

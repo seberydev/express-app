@@ -1,0 +1,60 @@
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">
+      <center>
+        <h1>Agregar Horario</h1>
+      </center>
+    </div>
+    <form class="card-body" action="/new-schedule-teacher" method="POST">
+      <label class="form-label">Semestre a asignar:</label>
+      <select class="form-select" id="semester" name="semester">
+        <option value="1">Primero</option>
+        <option value="3">Tercero</option>
+      </select>
+      <br />
+      <label class="form-label">Seleccionar Materia:</label>
+      <select class="form-select" name="subject" id="subject">
+        <optgroup label="Primero">
+          <option value="FP">Fundamentos de Programación</option>
+          <option value="DA">Destrezas del Aprendizaje</option>
+          <option value="MI">Matemáticas I</option>
+          <option value="IISC">Introducción a la Ingeniería en Sistemas
+            Computacionales</option>
+          <option value="EYM">Electricidad y Magnetismo</option>
+          <option value="DEV">Desarrollo de Entorno de Videojuegos</option>
+        </optgroup>
+        <optgroup label="Tercero">
+          <option value="IBD">Introducción a las Bases de Datos</option>
+          <option value="PII">Programación II</option>
+          <option value="RI">Redes I</option>
+          <option value="IP">Integración y Programación de Videojuegos</option>
+          <option value="10">Matemóticas III</option>
+        </optgroup>
+      </select>
+      <br />
+      <label class="form-label" for="teacher">Seleccionar Maestros:</label>
+      <select class="form-select" name="teacher">
+        <option value="0">Héctor Sánchez</option>
+        <option value="1">Israel Jiménez</option>
+        <option value="2">Carlos Badillo</option>
+        <option value="3">Jesús del Toro</option>
+        <option value="4">Mauro Soto</option>
+        <option value="5">Gerardo Aranda</option>
+        <option value="6">Víctor Perez</option>
+        <option value="7">Oscar Montalvo</option>
+        <option value="8">Mario Hernández</option>
+      </select>
+      <br />
+      <label class="form-label" for="hour">Horario:</label>
+      <select class="form-select" name="hour" id="hour">
+        <option value="">9:00 - 11:00</option>
+        <option value="">11:30 - 13:30</option>
+      </select>
+      <br />
+      <center>
+        <a class="btn btn-primary" href="/">Inicio</a>
+        <input class="btn btn-success" type="submit" value="Crear" />
+      </center>
+    </form>
+  </div>
+</div>
