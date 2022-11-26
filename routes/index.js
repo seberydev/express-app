@@ -4,7 +4,6 @@ const validateDataStudent = require("../controllers/validateDataStudent");
 const validateDataTeacher = require("../controllers/validateDataTeacher");
 const validateDataSchedule = require("../controllers/validateDataSchedule");
 const fs = require("fs");
-const { text } = require("express");
 const uuid = require("uuid").v4;
 
 /* GET home page. */
@@ -34,23 +33,29 @@ router.post("/new-info-student", function (req, res, next) {
     res.status(400).send("Verify Data");
   }
 
-  const infoData = {
-    _id: uuid(),
-    name: validatedData.value.name,
-    last_name: validatedData.value.last_name,
-    email: validatedData.value.email,
-    phone: validatedData.value.phone,
-    id: validatedData.value.id,
-    career: validatedData.value.career,
-    semester: validatedData.value.semester,
-  };
+  let checkArr = sdir.find((x) => x.id === validatedData.value.id);
 
-  sdir.push(infoData);
+  if (!checkArr) {
+    const infoData = {
+      _id: uuid(),
+      name: validatedData.value.name,
+      last_name: validatedData.value.last_name,
+      email: validatedData.value.email,
+      phone: validatedData.value.phone,
+      id: validatedData.value.id,
+      career: validatedData.value.career,
+      semester: validatedData.value.semester,
+    };
 
-  const json_dir = JSON.stringify(sdir);
-  fs.writeFileSync("json/db_directory_student.json", json_dir, "utf8");
+    sdir.push(infoData);
 
-  res.redirect("/students");
+    const json_dir = JSON.stringify(sdir);
+    fs.writeFileSync("json/db_directory_student.json", json_dir, "utf8");
+
+    res.redirect("/students");
+  } else {
+    res.send("Ya existe el alumno nms dormammu");
+  }
 });
 
 /* Delete student info */
@@ -85,21 +90,27 @@ router.post("/new-info-teacher", function (req, res, next) {
     res.status(400).send("Verify Data");
   }
 
-  const infoData = {
-    _id: uuid(),
-    name: validatedData.value.name,
-    last_name: validatedData.value.last_name,
-    email: validatedData.value.email,
-    phone: validatedData.value.phone,
-    id: validatedData.value.id,
-  };
+  let checkArr = tdir.find((x) => x.id === validatedData.value.id);
 
-  tdir.push(infoData);
+  if (!checkArr) {
+    const infoData = {
+      _id: uuid(),
+      name: validatedData.value.name,
+      last_name: validatedData.value.last_name,
+      email: validatedData.value.email,
+      phone: validatedData.value.phone,
+      id: validatedData.value.id,
+    };
 
-  const json_dir = JSON.stringify(tdir);
-  fs.writeFileSync("json/db_directory_teacher.json", json_dir, "utf8");
+    tdir.push(infoData);
 
-  res.redirect("/teachers");
+    const json_dir = JSON.stringify(tdir);
+    fs.writeFileSync("json/db_directory_teacher.json", json_dir, "utf8");
+
+    res.redirect("/teachers");
+  } else {
+    res.send("Ya existe el maestro");
+  }
 });
 
 /* Delete teacher info */
@@ -117,18 +128,18 @@ const people = fs.readFileSync("json/db_schedules.json");
 let person = JSON.parse(people);
 
 /* GET students schedule */
-router.get('/students-schedules', (req, res) => {
-  res.render('students-schedules', { title: "Horarios Alumnos", person });
+router.get("/students-schedules", (req, res) => {
+  res.render("students-schedules", { title: "Horarios Alumnos", person });
 });
 
 /* GET teachers schedule */
-router.get('/teachers-schedules', (req, res) => {
-  res.render('teachers-schedules', { title: "Horarios Maestros", person });
+router.get("/teachers-schedules", (req, res) => {
+  res.render("teachers-schedules", { title: "Horarios Maestros", person });
 });
 
 /* GET new schedule */
-router.get('/new-schedule', (req, res) => {
-  res.render('new-schedule', { title: "Cree Nuevos Horarios", tdir});
+router.get("/new-schedule", (req, res) => {
+  res.render("new-schedule", { title: "Cree Nuevos Horarios", tdir });
 });
 
 /* POST new schedule */
@@ -156,6 +167,5 @@ router.post("/new-schedule", function (req, res, next) {
 });
 
 // Schedules --------------------------------------------------------------------------------------------------------
-
 
 module.exports = router;
