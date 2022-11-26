@@ -128,11 +128,11 @@ router.get('/teachers-schedules', (req, res) => {
 
 /* GET new schedule */
 router.get('/new-schedule', (req, res) => {
-  res.render('new-schedule', { title: "Cree Nuevos Horarios"});
+  res.render('new-schedule', { title: "Cree Nuevos Horarios", tdir});
 });
 
-/* POST teachers schedule */
-router.post("/teachers-schedules", function (req, res, next) {
+/* POST new schedule */
+router.post("/new-schedule", function (req, res, next) {
   const validatedData = validateDataSchedule(req.body);
 
   if (validatedData.error) {
@@ -141,12 +141,15 @@ router.post("/teachers-schedules", function (req, res, next) {
 
   const infoData = {
     _id: uuid(),
-    
+    semester: validatedData.value.semester,
+    subject: validatedData.value.subject,
+    teacher: validatedData.value.teacher,
+    hour: validatedData.value.hour,
   };
 
-  teacher.push(infoData);
+  person.push(infoData);
 
-  const json_dir = JSON.stringify(teacher);
+  const json_dir = JSON.stringify(person);
   fs.writeFileSync("json/db_schedules.json", json_dir, "utf8");
 
   res.redirect("/teachers-schedules");

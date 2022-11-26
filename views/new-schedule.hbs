@@ -5,11 +5,11 @@
         <h1>Agregar Horario</h1>
       </center>
     </div>
-    <form class="card-body" action="/new-schedule-teacher" method="POST">
+    <form class="card-body" action="/new-schedule" method="POST">
       <label class="form-label">Semestre a asignar:</label>
       <select class="form-select" id="semester" name="semester">
-        <option value="1">Primero</option>
-        <option value="3">Tercero</option>
+        <option value="first">Primero</option>
+        <option value="third">Tercero</option>
       </select>
       <br />
       <label class="form-label">Seleccionar Materia:</label>
@@ -33,22 +33,16 @@
       </select>
       <br />
       <label class="form-label" for="teacher">Seleccionar Maestros:</label>
-      <select class="form-select" name="teacher">
-        <option value="0">Héctor Sánchez</option>
-        <option value="1">Israel Jiménez</option>
-        <option value="2">Carlos Badillo</option>
-        <option value="3">Jesús del Toro</option>
-        <option value="4">Mauro Soto</option>
-        <option value="5">Gerardo Aranda</option>
-        <option value="6">Víctor Perez</option>
-        <option value="7">Oscar Montalvo</option>
-        <option value="8">Mario Hernández</option>
+      <select class="form-select" name="teacher" id="teacher">
+        {{#each tdir}}
+        <option value="{{this.name}} {{this.last_name}}">{{this.name}} {{this.last_name}}</option>
+        {{/each}}
       </select>
       <br />
       <label class="form-label" for="hour">Horario:</label>
       <select class="form-select" name="hour" id="hour">
-        <option value="">9:00 - 11:00</option>
-        <option value="">11:30 - 13:30</option>
+        <option value="9:00 - 11:00">9:00 - 11:00</option>
+        <option value="11:30 - 13:30">11:30 - 13:30</option>
       </select>
       <br />
       <center>
