@@ -54,7 +54,7 @@ router.post("/new-info-student", function (req, res, next) {
 
     res.redirect("/students");
   } else {
-    res.send("Ya existe el alumno nms dormammu");
+    res.send("Ya existe el alumno");
   }
 });
 
